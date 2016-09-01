@@ -18,13 +18,10 @@ test ! -f .installed && { echo -e "\e[31mAn error occurred during the installati
 
 cp -v client.html  increment.html ${SITE_ROOT}
 
-if ! grep -q "# BEGIN apache-websocket" ${APACHE_CONFIG}; then
+if ! grep -q "# BEGIN apache-websocket example" ${APACHE_CONFIG}; then
 	cat >> /etc/apache2/apache2.conf <<_EOF
 
-# BEGIN apache-websocket
-LoadModule websocket_module   /usr/lib/apache2/modules/mod_websocket.so
-LoadModule websocket_draft76_module   /usr/lib/apache2/modules/mod_websocket_draft76.so
-
+# BEGIN apache-websocket example
 <IfModule mod_websocket.c>
   <Location /echo>
     SetHandler websocket-handler
@@ -48,7 +45,7 @@ LoadModule websocket_draft76_module   /usr/lib/apache2/modules/mod_websocket_dra
     SupportDraft75 On
   </Location>
 </IfModule>
-# END apache-websocket
+# END apache-websocket example
 
 _EOF
 fi
